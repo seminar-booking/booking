@@ -1,5 +1,7 @@
 package com.example.reservationservice.dto;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import java.sql.Timestamp;
 import java.util.UUID;
 
@@ -110,5 +112,52 @@ public class Reservation {
 	
 	public void setId(UUID id) {
 		this.id = id;
+	}
+	
+	@Override
+	public String toString() {
+		return new ToStringBuilder(this)
+				.append("id", id)
+				.append("roomId", roomId)
+				.append("userId", userId)
+				.append("groupName", groupName)
+				.append("memberCount", memberCount)
+				.append("status", status)
+				.append("createdDate", createdDate)
+				.append("startTime", startTime)
+				.append("endTime", endTime)
+				.toString();
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		
+		Reservation that = (Reservation) o;
+		
+		if (roomId != that.roomId) return false;
+		if (userId != that.userId) return false;
+		if (memberCount != that.memberCount) return false;
+		if (status != that.status) return false;
+		if (id != null ? !id.equals(that.id) : that.id != null) return false;
+		if (groupName != null ? !groupName.equals(that.groupName) : that.groupName != null) return false;
+		if (createdDate != null ? !createdDate.equals(that.createdDate) : that.createdDate != null) return false;
+		if (startTime != null ? !startTime.equals(that.startTime) : that.startTime != null) return false;
+		return endTime != null ? endTime.equals(that.endTime) : that.endTime == null;
+	}
+	
+	@Override
+	public int hashCode() {
+		int result = id != null ? id.hashCode() : 0;
+		result = 31 * result + roomId;
+		result = 31 * result + userId;
+		result = 31 * result + (groupName != null ? groupName.hashCode() : 0);
+		result = 31 * result + memberCount;
+		result = 31 * result + status;
+		result = 31 * result + (createdDate != null ? createdDate.hashCode() : 0);
+		result = 31 * result + (startTime != null ? startTime.hashCode() : 0);
+		result = 31 * result + (endTime != null ? endTime.hashCode() : 0);
+		return result;
 	}
 }

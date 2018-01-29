@@ -1,5 +1,7 @@
 package com.example.reservationservice.dto;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * Created by KwangHan on 2018. 1. 21..
  */
@@ -90,14 +92,42 @@ public class Room {
 	
 	@Override
 	public String toString() {
-		return "Room{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				", description='" + description + '\'' +
-				", optimalPersonnel=" + optimalPersonnel +
-				", minimumPersonnel=" + minimumPersonnel +
-				", maximumPersonnel=" + maximumPersonnel +
-				", status=" + status +
-				'}';
+		return new ToStringBuilder(this)
+				.append("id", id)
+				.append("name", name)
+				.append("description", description)
+				.append("optimalPersonnel", optimalPersonnel)
+				.append("minimumPersonnel", minimumPersonnel)
+				.append("maximumPersonnel", maximumPersonnel)
+				.append("status", status)
+				.toString();
+	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		
+		Room room = (Room) o;
+		
+		if (id != room.id) return false;
+		if (optimalPersonnel != room.optimalPersonnel) return false;
+		if (minimumPersonnel != room.minimumPersonnel) return false;
+		if (maximumPersonnel != room.maximumPersonnel) return false;
+		if (status != room.status) return false;
+		if (name != null ? !name.equals(room.name) : room.name != null) return false;
+		return description != null ? description.equals(room.description) : room.description == null;
+	}
+	
+	@Override
+	public int hashCode() {
+		int result = (int) (id ^ (id >>> 32));
+		result = 31 * result + (name != null ? name.hashCode() : 0);
+		result = 31 * result + (description != null ? description.hashCode() : 0);
+		result = 31 * result + optimalPersonnel;
+		result = 31 * result + minimumPersonnel;
+		result = 31 * result + maximumPersonnel;
+		result = 31 * result + status;
+		return result;
 	}
 }
