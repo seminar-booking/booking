@@ -1,4 +1,4 @@
-package com.hans.boot.demo.entity;
+package com.example.reservationservice.dto;
 
 /**
  * Created by KwangHan on 2018. 1. 21..
@@ -16,7 +16,7 @@ public class Room {
 	
 	public enum Status {
 		
-		Available(1), Unavailable(0);
+		AVAILABLE(1), UNAVAILABLE(0);
 		int code;
 		
 		Status(int code) {

@@ -1,15 +1,16 @@
-package com.hans.boot.demo.entity;
+package com.example.reservationservice.dto;
 
 import java.sql.Timestamp;
+import java.util.UUID;
 
 /**
  * Created by KwangHan on 2018. 1. 21..
  */
 public class Reservation {
 	
-	private int id;
-	private int roomId;
-	private int userId;
+	private UUID id;
+	private int  roomId;
+	private int  userId;
 	
 	private String groupName;
 	
@@ -23,7 +24,7 @@ public class Reservation {
 	
 	public enum Status {
 		
-		Active(1), User_Cancel(2), Admin_Cancel(3);
+		ACTIVE(1), USER_CANCEL(2), ADMIN_CANCEL(3);
 		private int code;
 		
 		Status(int code) {
@@ -101,5 +102,13 @@ public class Reservation {
 	
 	public void setEndTime(Timestamp endTime) {
 		this.endTime = endTime;
+	}
+	
+	public UUID getId() {
+		return id;
+	}
+	
+	public void setId(UUID id) {
+		this.id = id;
 	}
 }
