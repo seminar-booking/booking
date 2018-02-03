@@ -50,11 +50,10 @@
 		</dependency>
 
 		<!-- S:Repository Dependencies -->
-		<!--
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-cassandra</artifactId>
-		</dependency>-->
+		</dependency>
 		<!-- E:Repository Dependencies -->
 
 		<dependency>
