@@ -2,3 +2,4 @@
 .idea/
 member-service/.mvn/
 reservation-service/.mvn/
+corepackage/target/
