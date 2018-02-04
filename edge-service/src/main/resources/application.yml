@@ -1,0 +1,38 @@
+management:
+  security:
+    enabled: false
+
+server:
+  port: 8761
+spring:
+  application:
+    name: edge-service
+
+eureka:
+  instance:
+    hostname: 13.125.87.148
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      default-zone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    enabled: true
+  server:
+    enable-self-preservation: true
+
+
+zuul:
+  ignored-services: "*"
+  routes:
+    member-service:
+      path: /member/**
+      serviceId: member-service
+      strip-prefix: true
+
+ribbon:
+  ConnectTimeout: 30000
+  ReadTimeout: 90000
+  MaxAutoRetries: 1
+  MaxAutoRetriesNextServer: 2
+  eureka:
+    enabled: true

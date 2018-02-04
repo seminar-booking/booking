@@ -3,3 +3,4 @@
 member-service/.mvn/
 reservation-service/.mvn/
 corepackage/target/
+edge-service/.mvn/
