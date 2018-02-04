@@ -20,7 +20,6 @@ eureka:
   server:
     enable-self-preservation: true
 
-
 zuul:
   ignored-services: "*"
   routes:
@@ -28,6 +27,10 @@ zuul:
       path: /member/**
       serviceId: member-service
       strip-prefix: true
+    reservation-service:
+      path: /reservation/**
+      serviceId: reservation-service
+      strip-prefix: false
 
 ribbon:
   ConnectTimeout: 30000
