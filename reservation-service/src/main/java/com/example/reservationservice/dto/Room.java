@@ -1,6 +1,8 @@
 package com.example.reservationservice.dto;
 
+
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 /**
  * Created by KwangHan on 2018. 1. 21..
@@ -90,17 +92,10 @@ public class Room {
 		this.status = status;
 	}
 	
+	
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this)
-				.append("id", id)
-				.append("name", name)
-				.append("description", description)
-				.append("optimalPersonnel", optimalPersonnel)
-				.append("minimumPersonnel", minimumPersonnel)
-				.append("maximumPersonnel", maximumPersonnel)
-				.append("status", status)
-				.toString();
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
 	}
 	
 	@Override
