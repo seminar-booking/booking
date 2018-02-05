@@ -1,6 +1,8 @@
 package com.example.reservationservice.dto;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.sql.Timestamp;
 import java.util.UUID;
@@ -116,17 +118,7 @@ public class Reservation {
 	
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this)
-				.append("id", id)
-				.append("roomId", roomId)
-				.append("userId", userId)
-				.append("groupName", groupName)
-				.append("memberCount", memberCount)
-				.append("status", status)
-				.append("createdDate", createdDate)
-				.append("startTime", startTime)
-				.append("endTime", endTime)
-				.toString();
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
 	}
 	
 	@Override
