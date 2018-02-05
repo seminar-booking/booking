@@ -1,21 +1,19 @@
 package com.example.member;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 public class EmailVelified {
 	
-	private String id;
-	private String email;
+	private long id;
+	// 방식 아직 미확정 
 	private String certificationNumber;
-	public String getId() {
+	
+	public long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
 	}
 	public String getCertificationNumber() {
 		return certificationNumber;
@@ -25,8 +23,36 @@ public class EmailVelified {
 	}
 	
 	@Override
-	public String toString() {
-		return "EmailVelified [id=" + id + ", email=" + email + ", certificationNumber=" + certificationNumber + "]";
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((certificationNumber == null) ? 0 : certificationNumber.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		return result;
 	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		EmailVelified other = (EmailVelified) obj;
+		if (certificationNumber == null) {
+			if (other.certificationNumber != null)
+				return false;
+		} else if (!certificationNumber.equals(other.certificationNumber))
+			return false;
+		if (id != other.id)
+			return false;
+		return true;
+	}
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
+	}
+	
+	
 
 }
