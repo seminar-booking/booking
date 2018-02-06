@@ -50,11 +50,11 @@ public class Member {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public short getLoginFailureCount() {
+	public int getLoginFailureCount() {
 		return loginFailureCount;
 	}
-	public void setLoginFailureCount(short loginFailureCount) {
-		this.loginFailureCount = loginFailureCount;
+	public void setLoginFailureCount(int loginFailureCount) {
+		this.loginFailureCount = (short)loginFailureCount;
 	}
 	public Date getLastLoginDate() {
 		return lastLoginDate;
