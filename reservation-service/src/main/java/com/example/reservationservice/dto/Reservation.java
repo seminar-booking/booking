@@ -20,7 +20,7 @@ public class Reservation {
 	
 	private int memberCount;
 	
-	private int status;
+	private Status status;
 	
 	private Timestamp createdDate;
 	private Timestamp startDate;
@@ -76,11 +76,11 @@ public class Reservation {
 		this.memberCount = memberCount;
 	}
 
-	public int getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 
@@ -146,7 +146,7 @@ public class Reservation {
 		result = 31 * result + userId;
 		result = 31 * result + (groupName != null ? groupName.hashCode() : 0);
 		result = 31 * result + memberCount;
-		result = 31 * result + status;
+		result = 31 * result + status.getCode();
 		result = 31 * result + (createdDate != null ? createdDate.hashCode() : 0);
 		result = 31 * result + (startDate != null ? startDate.hashCode() : 0);
 		result = 31 * result + (endDate != null ? endDate.hashCode() : 0);

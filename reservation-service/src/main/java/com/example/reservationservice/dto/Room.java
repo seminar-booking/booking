@@ -15,8 +15,7 @@ public class Room {
 	private int minimumPersonnel;
 	private int maximumPersonnel;
 	//@Enumerable
-	//private Status status;
-	private int status;
+	private Status status;
 	
 	public enum Status {
 		
@@ -84,11 +83,11 @@ public class Room {
 		this.maximumPersonnel = maximumPersonnel;
 	}
 	
-	public int getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 	
-	public void setStatus(int status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 	
@@ -122,7 +121,7 @@ public class Room {
 		result = 31 * result + optimalPersonnel;
 		result = 31 * result + minimumPersonnel;
 		result = 31 * result + maximumPersonnel;
-		result = 31 * result + status;
+		result = 31 * result + status.getCode();
 		return result;
 	}
 }
