@@ -92,19 +92,19 @@ public class Reservation {
 		this.createdDate = createdDate;
 	}
 
-	public Timestamp getstartDate() {
+	public Timestamp getStartDate() {
 		return startDate;
 	}
 
-	public void setstartDate(Timestamp startDate) {
+	public void setStartDate(Timestamp startDate) {
 		this.startDate = startDate;
 	}
 
-	public Timestamp getendDate() {
+	public Timestamp getEndDate() {
 		return endDate;
 	}
 
-	public void setendDate(Timestamp endDate) {
+	public void setEndDate(Timestamp endDate) {
 		this.endDate = endDate;
 	}
 
