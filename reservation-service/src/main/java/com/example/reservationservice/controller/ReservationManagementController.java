@@ -1,8 +1,8 @@
 package com.example.reservationservice.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -23,9 +23,9 @@ public class ReservationManagementController {
 		return null;
 	}
 	
-	@DeleteMapping("/group")
-	public ModelAndView groupDelete() {
-//		CRUD를 REST API 처럼 HTTP METHOD 로 분류..
+	@GetMapping("/group/{groupNameId}")
+	public ModelAndView groupDelete(@PathVariable(value = "groupNameId") long groupNameId) {
+//		삭제할 대상의 id 정보가 필요하다. 
 		return null;
 	}
 
