@@ -1,4 +1,4 @@
-package com.example.member;
+package com.example.member.dto;
 import java.util.Date;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
