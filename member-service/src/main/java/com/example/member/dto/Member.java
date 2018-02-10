@@ -50,7 +50,7 @@ public class Member {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public int getLoginFailureCount() {
+	public short getLoginFailureCount() {
 		return loginFailureCount;
 	}
 	public void setLoginFailureCount(int loginFailureCount) {
