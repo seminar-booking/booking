@@ -1,40 +1,37 @@
 package com.example.reservationservice.controller;
 
 
+import com.example.reservationservice.dto.Room;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 
 @Controller("reservation")
 public class ReservationController {
 
 
-    @GetMapping(value = {"/index"})
-    public ModelAndView printIndex() {
-        // 부스 list 출력.
-        // 별 다른 데이터를 입력하지 않아도 되는 페이지이므로 Get방식이 적합할 것 같다.
+    @GetMapping(value = {"/room/all"})
+    public List<Room> returnAllRoom() {
+        // method naming : 방 모두를 반환한다는 의미, (return, give)등의 동사 중 어떤 걸 써야 할 지 고민.
+        // 지금 현재 선택 가능한 모든 방을 반환하여 출력.
         return null;
     }
 
-    @PostMapping(value = {"/boothselect"})
-    public ModelAndView selectAvailableBooth() {
-        // 검색 결과에 대한 부스 list 출력.
-        // 앞선 메인 페이지에서 선택한 결과(단기/장기 포함)로 최적인 방을 찾아야 하므로 Post로 해야 할 필요가 있다.
+    @GetMapping(value = {"/room/optimum"})
+    public List<Room> returnAvailableRoom() {
+        // method naming : 이용 가능한 방을 반환한다는 의미.
+        // 요건에 따라 최적의 방을 검색한 뒤, 적절한 방을 반환.
         return null;
     }
 
-    @PostMapping(value = {"/confirm"})
-    public ModelAndView confirmReservation() {
-        // 모든 예약 정보 최종 확인 페이지 출력.
-        // 핸드폰 번호 인증 등의 이유로 Post가 적합할 것 같다.
-        return null;
-    }
-
-    @PostMapping(value = {"/register"})
-    public ModelAndView registerReservation() {
-        // 모든 예약 정보를 등록하는 내부 페이지.
-        return null;
+    @PostMapping(value = {"/reservation/{memberid}"})
+    public boolean registerReservation() {
+        // method naming : 예약을 등록한다는 의미.
+        // 해당 member id에 대해 모든 예약 정보를 등록.
+        // 정상적으로 등록 되었는 지, 아닌지 여부를 반환.
+        return true;
     }
 }
