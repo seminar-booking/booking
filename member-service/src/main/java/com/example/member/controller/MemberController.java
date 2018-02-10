@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.example.member.dto.Member;
 import com.example.member.dto.TempPassword;
 
-@Controller("/member")
+@Controller
+@RequestMapping("/member")
 public class MemberController {
 	
 	@RequestMapping(value = "/insertMember", method = RequestMethod.POST, produces = "application/json")
