@@ -1,6 +1,7 @@
 package com.example.reservationservice.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -21,9 +22,14 @@ public class Reservation {
 	private int memberCount;
 	
 	private Status status;
-	
+	@JsonFormat
+			(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private Timestamp createdDate;
+	@JsonFormat
+			(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private Timestamp startDate;
+	@JsonFormat
+			(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private Timestamp endDate;
 
 	public enum Status {

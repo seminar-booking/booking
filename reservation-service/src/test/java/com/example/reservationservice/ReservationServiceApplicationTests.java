@@ -18,7 +18,6 @@ public class ReservationServiceApplicationTests {
 		room.setMinimumPersonnel(8);
 		room.setName("16");
 		room.setOptimalPersonnel(10);
-		room.setStatus(Room.Status.UNAVAILABLE.getCode());
 		
 		
 		System.out.println("===============================================");
