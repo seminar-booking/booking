@@ -1,4 +1,4 @@
-package com.example.member;
+package com.example.member.dto;
 import java.util.Date;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -50,7 +50,7 @@ public class Member {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public int getLoginFailureCount() {
+	public short getLoginFailureCount() {
 		return loginFailureCount;
 	}
 	public void setLoginFailureCount(int loginFailureCount) {
