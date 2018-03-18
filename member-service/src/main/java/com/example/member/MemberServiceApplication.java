@@ -1,17 +1,16 @@
 package com.example.member;
 
-import com.example.core.log.RequestLogConfig;
-import org.springframework.boot.SpringApplication;
+import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.context.annotation.Import;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 
 @SpringBootApplication
-@Import(RequestLogConfig.class)
-@EnableEurekaClient
 public class MemberServiceApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MemberServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+
+        new SpringApplicationBuilder(MemberServiceApplication.class)
+                .bannerMode(Banner.Mode.OFF)
+                .run(args);
+    }
 }
