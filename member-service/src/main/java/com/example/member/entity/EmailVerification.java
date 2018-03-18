@@ -1,27 +1,74 @@
 package com.example.member.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
 @Entity
 @Table(name = "T_email_verification")
+@EntityListeners(AuditingEntityListener.class)
 public class EmailVerification {
 
     @Id
     private UUID id;
 
-    @Column(nullable = false, length = 10)
-    private String certificationLink;
+    @Column(nullable = false, length = 12)
+    private String certificationLink = UUID.randomUUID().toString().substring(24);
 
     @Column(nullable = false)
+    @CreatedDate
     private Date issuedAt;
+
+    @OneToOne
+    @MapsId
+    @JsonBackReference
+    private Member member;
+
+    public EmailVerification() {
+
+    }
+
+    public EmailVerification(Member member) {
+        this.member = member;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getCertificationLink() {
+        return certificationLink;
+    }
+
+    public void setCertificationLink(String certificationLink) {
+        this.certificationLink = certificationLink;
+    }
+
+    public Date getIssuedAt() {
+        return issuedAt;
+    }
+
+    public void setIssuedAt(Date issuedAt) {
+        this.issuedAt = issuedAt;
+    }
+
+    public Member getMember() {
+        return member;
+    }
+
+    public void setMember(Member member) {
+        this.member = member;
+    }
 
     @Override
     public boolean equals(Object o) {

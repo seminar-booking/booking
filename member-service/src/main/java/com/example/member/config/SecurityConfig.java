@@ -1,5 +1,7 @@
 package com.example.member.config;
 
+import com.example.member.security.handler.SimpleLoginDeniedHandler;
+import com.example.member.security.handler.SimpleLoginEntryPoint;
 import com.example.member.security.rest.RestLoginConfigurer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -32,13 +34,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("email")
                 .successHandler(authenticationSuccessHandler)
                 .failureHandler(authenticationFailureHandler)
-                .permitAll(false)
             .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "DELETE"))
                 .logoutSuccessHandler(logoutSuccessHandler)
-            .and().authorizeRequests()
-                .antMatchers("POST", "/login").anonymous()
+            .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(new SimpleLoginEntryPoint())
+                .accessDeniedHandler(new SimpleLoginDeniedHandler())
+            .and()
+                .authorizeRequests()
                 .antMatchers("POST", "/member").anonymous()
                 .antMatchers("GET", "/member/verification/*").permitAll()
                 .antMatchers("/member/**", "members/**").authenticated()

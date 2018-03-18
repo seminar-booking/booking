@@ -1,6 +1,8 @@
 package com.example.member;
 
+import com.example.member.entity.EmailVerification;
 import com.example.member.entity.Member;
+import com.example.member.repository.EmailVerificationRepository;
 import com.example.member.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
@@ -14,6 +16,7 @@ import javax.annotation.PostConstruct;
 public class DataInitializer {
 
     private MemberRepository memberRepository;
+    private EmailVerificationRepository emailVerificationRepository;
     private PasswordEncoder passwordEncoder;
 
     @PostConstruct
@@ -33,6 +36,11 @@ public class DataInitializer {
     @Autowired
     public void setMemberRepository(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
+    }
+
+    @Autowired
+    public void setEmailVerificationRepository(EmailVerificationRepository emailVerificationRepository) {
+        this.emailVerificationRepository = emailVerificationRepository;
     }
 
     @Autowired

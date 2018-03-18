@@ -31,9 +31,9 @@ public class SimpleAuthenticationFailureHandler extends SimpleUrlAuthenticationF
             logger.info(exception);
             //memberRepository.findOneByEmail(exception.)
         } else if (exception instanceof DisabledException) {
-            writer.write("Account Not Verified");
+            writer.write(String.format("{ \"%s\" : \"%s\" }", "error", "Account Not Verified"));
         } else if (exception instanceof LockedException) {
-            writer.write("This Account was Locked");
+            writer.write(String.format("{ \"%s\" : \"%s\" }", "error", "This Account was Locked"));
         }
 
         writer.flush();

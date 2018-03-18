@@ -4,6 +4,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,6 +12,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "T_member")
+@EntityListeners(AuditingEntityListener.class)
 public class Member {
 
     @Id
@@ -42,12 +44,16 @@ public class Member {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastModifiedAt;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "member")
     private TemporaryPassword temporaryPassword;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "member")
+    private EmailVerification emailVerification;
 
     @PrePersist
     public void prePersist() {
         this.id = UUID.randomUUID();
+        this.emailVerification = new EmailVerification(this);
     }
 
     public UUID getId() {
@@ -128,6 +134,14 @@ public class Member {
 
     public void setTemporaryPassword(TemporaryPassword temporaryPassword) {
         this.temporaryPassword = temporaryPassword;
+    }
+
+    public EmailVerification getEmailVerification() {
+        return emailVerification;
+    }
+
+    public void setEmailVerification(EmailVerification emailVerification) {
+        this.emailVerification = emailVerification;
     }
 
     public boolean isBlocked() {

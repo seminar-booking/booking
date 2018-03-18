@@ -15,7 +15,7 @@ public class TemporaryPassword {
     @Id
     private UUID id;
 
-    @Column(nullable = false, length = 10)
+    @Column(nullable = false, length = 12)
     private String password;
 
     @Column(nullable = false)
