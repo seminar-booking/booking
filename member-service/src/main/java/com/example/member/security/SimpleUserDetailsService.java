@@ -22,10 +22,6 @@ public class SimpleUserDetailsService implements UserDetailsService {
         Member userAccount = memberRepository.findOneByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Not Joined Yet"));
 
-        /**
-         * if member has TemporaryPassword,
-         */
-
         return new UserAccount(userAccount, Collections.singleton(new SimpleGrantedAuthority("ACTUATOR")));
     }
 

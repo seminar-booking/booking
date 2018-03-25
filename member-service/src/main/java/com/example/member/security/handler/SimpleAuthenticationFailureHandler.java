@@ -1,6 +1,7 @@
 package com.example.member.security.handler;
 
 import com.example.member.repository.MemberRepository;
+import com.example.member.util.ScalaResultWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -29,11 +30,14 @@ public class SimpleAuthenticationFailureHandler extends SimpleUrlAuthenticationF
 
         if (exception instanceof BadCredentialsException) {
             logger.info(exception);
-            //memberRepository.findOneByEmail(exception.)
+            memberRepository.findOneByEmail(request.getAttribute("email").toString())
+                    .ifPresent(member -> memberRepository.save(member.failLogin()));
+
+            writer.write(new ScalaResultWrapper<>("error", "Email or Password is invalid").toString());
         } else if (exception instanceof DisabledException) {
-            writer.write(String.format("{ \"%s\" : \"%s\" }", "error", "Account Not Verified"));
+            writer.write(new ScalaResultWrapper<>("error", "Account Not Verified").toString());
         } else if (exception instanceof LockedException) {
-            writer.write(String.format("{ \"%s\" : \"%s\" }", "error", "This Account was Locked"));
+            writer.write(new ScalaResultWrapper<>("error", "This Account was Locked").toString());
         }
 
         writer.flush();

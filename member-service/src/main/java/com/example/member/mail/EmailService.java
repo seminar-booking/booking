@@ -45,8 +45,8 @@ public class EmailService {
 
     private String resolveTemplateType(EmailType emailType) {
         switch (emailType) {
-            case VERIFICATION: return "emailVerification";
-            case TEMP_PASSWORD: return "temporaryPassword";
+            case VERIFICATION: return "emailVerification.html";
+            case TEMP_PASSWORD: return "temporaryPassword.html";
         }
 
         return null;

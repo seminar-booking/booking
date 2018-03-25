@@ -1,10 +1,7 @@
 package com.example.member.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,26 +9,28 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "T_email_verification")
-@EntityListeners(AuditingEntityListener.class)
 public class EmailVerification {
 
     @Id
     private UUID id;
 
     @Column(nullable = false, length = 12)
-    private String certificationLink = UUID.randomUUID().toString().substring(24);
+    private String certificationLink;
 
     @Column(nullable = false)
-    @CreatedDate
-    private Date issuedAt;
+    private Date expireAt;
 
     @OneToOne
     @MapsId
-    @JsonBackReference
     private Member member;
 
-    public EmailVerification() {
+    @PrePersist
+    public void init() {
+        certificationLink = UUID.randomUUID().toString().substring(24);
+        expireAt = new Date(new Date().getTime() + 60000 * 5);
+    }
 
+    public EmailVerification() {
     }
 
     public EmailVerification(Member member) {
@@ -54,12 +53,12 @@ public class EmailVerification {
         this.certificationLink = certificationLink;
     }
 
-    public Date getIssuedAt() {
-        return issuedAt;
+    public Date getExpireAt() {
+        return expireAt;
     }
 
-    public void setIssuedAt(Date issuedAt) {
-        this.issuedAt = issuedAt;
+    public void setExpireAt(Date expireAt) {
+        this.expireAt = expireAt;
     }
 
     public Member getMember() {

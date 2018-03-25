@@ -2,7 +2,6 @@ package com.example.member.entity;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -19,16 +18,23 @@ public class TemporaryPassword {
     private String password;
 
     @Column(nullable = false)
-    @CreatedDate
-    private Date issuedAt;
+    private Date expireAt;
 
     @OneToOne
-    @PrimaryKeyJoinColumn
+    @MapsId
     private Member member;
 
+    public TemporaryPassword() {
+    }
+
+    public TemporaryPassword(Member member) {
+        this.member = member;
+    }
+
     @PrePersist
-    public void createTemporaryPassword() {
-        this.password = UUID.randomUUID().toString().substring(26);
+    public void init() {
+        password = UUID.randomUUID().toString().substring(26);
+        expireAt = new Date(new Date().getTime() + 60000 * 3);
     }
 
     public UUID getId() {
@@ -47,12 +53,12 @@ public class TemporaryPassword {
         this.password = password;
     }
 
-    public Date getIssuedAt() {
-        return issuedAt;
+    public Date getExpireAt() {
+        return expireAt;
     }
 
-    public void setIssuedAt(Date issuedAt) {
-        this.issuedAt = issuedAt;
+    public void setExpireAt(Date expireAt) {
+        this.expireAt = expireAt;
     }
 
     public Member getMember() {

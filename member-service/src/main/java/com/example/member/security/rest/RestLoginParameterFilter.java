@@ -29,9 +29,8 @@ public class RestLoginParameterFilter extends UsernamePasswordAuthenticationFilt
             throw new AuthenticationServiceException("Authentication method not supported: " + servletRequest.getMethod());
         }
 
-        SimpleAuthentication authRequest = null;
         try {
-            authRequest = getUsernamePasswordToken(servletRequest);
+            SimpleAuthentication authRequest = getUsernamePasswordToken(servletRequest);
             setDetails(servletRequest, authRequest);
 
             return this.getAuthenticationManager().authenticate(authRequest);
@@ -44,7 +43,11 @@ public class RestLoginParameterFilter extends UsernamePasswordAuthenticationFilt
 
         @SuppressWarnings("unchecked")
         Map<String, String> loginRequestMap = objectMapper.readValue(request.getInputStream(), HashMap.class);
+        request.setAttribute("email", loginRequestMap.get(this.getUsernameParameter()));
+
         return new SimpleAuthentication(loginRequestMap.get(this.getUsernameParameter()), loginRequestMap.get(this.getPasswordParameter()));
+
+
     }
 
     @Autowired

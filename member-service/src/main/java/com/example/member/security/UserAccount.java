@@ -13,7 +13,7 @@ public class UserAccount extends User {
     private String nickname;
 
     public UserAccount(Member member, Collection<? extends GrantedAuthority> authorities) {
-        super(member.getEmail(), member.getPassword(),
+        super(member.getEmail(), member.getLoginPassword(),
                 member.isVerified(), true, true,
                 !member.isBlocked(), authorities);
 

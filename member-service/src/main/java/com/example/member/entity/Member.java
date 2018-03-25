@@ -1,7 +1,11 @@
 package com.example.member.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -13,6 +17,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "T_member")
 @EntityListeners(AuditingEntityListener.class)
+@Audited
 public class Member {
 
     @Id
@@ -22,6 +27,7 @@ public class Member {
     private String email;
 
     @Column(nullable = false, length = 60)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @Column(nullable = false, length = 20)
@@ -45,9 +51,13 @@ public class Member {
     private Date lastModifiedAt;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "member")
+    @NotAudited
+    @JsonIgnore
     private TemporaryPassword temporaryPassword;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "member")
+    @NotAudited
+    @JsonIgnore
     private EmailVerification emailVerification;
 
     @PrePersist
@@ -157,6 +167,19 @@ public class Member {
         this.loginFailureCount = 0;
         this.lastLoginDate = new Date();
         return this;
+    }
+
+    public void issueTemporaryPassword() {
+        this.temporaryPassword = new TemporaryPassword(this);
+    }
+
+    public String getLoginPassword() {
+
+        if (this.getTemporaryPassword() != null && this.getTemporaryPassword().getExpireAt().after(new Date())) {
+            return this.getTemporaryPassword().getPassword();
+        }
+
+        return this.getPassword();
     }
 
     @Override
